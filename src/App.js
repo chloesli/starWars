@@ -13,10 +13,10 @@ class App extends Component {
       planets: [],
       search: '',
       next:null,
-      sortDirection:'',
+      sortDirection:'asc',
       popDir:'',
       nameDir:'',
-      sortValue:'',
+      sortValue:'url',
     }
 
     this.getPlanets = this.getPlanets.bind(this);
@@ -88,12 +88,13 @@ class App extends Component {
     const {planets} = this.state;
     return (
       <div className="App">
-         <div className="planet-search"> Search: <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/></div>
+         <div className="planet-search">Enter a planet name: <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/></div>
+
          <div className="planets-name-h">Name <button onClick={() => this.handleSortName()}> sort </button></div>
          <div className="planets-pop-h">Population <button onClick={() => this.handleSortPop()}> sort </button></div>
          <div className="planets-terrain-h"> Terrain</div>
-        <ol> <List planets={orderBy(planets, this.state.sortValue, this.state.sortDirection)} /> </ol>
 
+         <List planets={orderBy(planets, this.state.sortValue, this.state.sortDirection)} />
       </div>
 
     );
