@@ -45,7 +45,7 @@ class App extends Component {
   componentDidMount() {
     this.getPlanets()
   }
-  
+
   handleSortName() {
     this.setState({sortValue:'name'})
     if (this.state.nameDir === 'asc') {

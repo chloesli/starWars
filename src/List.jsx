@@ -11,7 +11,6 @@ class List extends Component {
           console.log(p)
           return (
             <div key={p.url} className="planets-wrap">
-
                <div className="planets-name">{p.name} </div>
                <div className="planets-pop"> {p.population} </div>
                <div className="planets-terrain"> {p.terrain}</div>
