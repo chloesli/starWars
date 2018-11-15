@@ -12,10 +12,6 @@ Then run the following commands while in the project folder:
 
 AND 
 
-### `npm install lodash`
-
-AND 
-
 ### `npm start`
 
 Some credit goes to: 
