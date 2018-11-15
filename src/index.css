@@ -1,16 +1,23 @@
+/* Applies to all elements */
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Inconsolata', monospace;
 }
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Muli', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
 
+/* React App Div*/
+#root {
+  padding: 30px;
+  background-color: #1A1C50;
+  color: #E9E9E9;
+}
+
+/* Highlight styling */
 ::-moz-selection { /* Code for Firefox */
     color:#1A1C50;
     background:#D83D2B;
@@ -18,9 +25,10 @@ body {
 
 ::selection {
     color:#D83D2B;
-    background-color: white;
+    background-color: #1A1B34;
 }
 
+/* Container for Title page */
 .container {
   padding: 30px;
   border-bottom: 1px solid black;
@@ -35,11 +43,14 @@ body {
   position: fixed;
 }
 
+/* Star Wars logo */
 .container img {
   max-width: 1000px;
   width: 80%;
   margin-top: 15%;
 }
+
+/* Deathstare image bottom right */
 .deathstar img {
   max-width: 1000px;
   position: absolute;
@@ -48,57 +59,25 @@ body {
   right: 0px;
   height: 40%;
 }
-.spaceship img {
-  max-width: 400px;
-  width: 200px;
-  position: absolute;
-  top: 0px;
-  left: 30px;
-  z-index: 100;
-}
 
+/* Basic links styling */
 a:link, a:visited, a:active {
   color: #D52812;
 }
 
-.table-wrap {
-  padding: 80px;
-}
-#root {
-  padding: 30px;
-  background-color: #1A1C50;
-  color: #E9E9E9;
-}
+/* Wrapper and container for the table */
 .table-container {
   width: 100%;
   min-height: 100%;
   background: -webkit-linear-gradient(to bottom,  #484967, #1A1C50, #000000);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #484967, #1A1C50, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-h1 {
-  color: black;
-  text-decoration: underline;
+
+.table-wrap {
+  padding: 80px;
 }
 
-.planets-name, .planets-pop, .planets-terrain {
-  display:inline-block;
-  width: 30%;
-  padding: 10px;
-  display: table-cell;
-  text-align: left;
-  box-sizing: border-box;
-}
-
-.planets-name-h, .planets-pop-h, .planets-terrain-h {
-  font-weight: bold;
-  display: table-cell;
-  text-align: left;
-  display: inline-block;
-  text-align: left;
-  width: 30%;
-  padding: 10px;
-  font-size: 16px;
-}
+/* Wrapper for each row of the table */
 .planets-wrap {
   text-align: left;
   height: auto;
@@ -111,15 +90,10 @@ h1 {
   -moz-transition: all 0.2s ease-in-out; /*this works in firefox*/
   -webkit-transition: all 0.2s ease-in-out; /*this works in chrome*/
 }
+
+/* Hover effect for each row*/
 .planets-wrap:hover {
-  text-align: left;
-  height: auto;
-  vertical-align: top;
   background-color:#07082A;
-  margin-top: 0px;
-  box-sizing: border-box;
-  min-width: 100%;
-  display: table;
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out; /*this works in firefox*/
   -webkit-transition: all 0.2s ease-in-out; /*this works in chrome*/
@@ -127,6 +101,29 @@ h1 {
   -moz-box-shadow: 0 0 5px 2px #72749C;
   box-shadow: 0 0 5px 2px #72749C;
 }
+
+/* Each cell in the table */
+.planets-name, .planets-pop, .planets-terrain {
+  display:table-cell;
+  width: 30%;
+  padding: 10px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* Table heading styling */
+.planets-name-h, .planets-pop-h, .planets-terrain-h {
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: underline;
+  text-align: left;
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+/* Search field CSS */
 .planet-search {
   position: relative;
   text-align: center;
@@ -135,10 +132,8 @@ h1 {
   width: 100%;
 }
 
-.planet-search input[type=text] {
+.search-field {
   margin-top: 10px;
-  width: 100%;
-  padding: 10px;
   border: none;
   outline: none;
   color: #D83D2B;
@@ -150,11 +145,38 @@ h1 {
   box-shadow: 0 0 5px 2px #72749C;
 }
 
-.planet-search input[type=text]:focus {
-
+/* Search bar input */
+.planet-search input[type=text] {
+  position: relative;
+  top: -2px;
+  width: calc(100% - 50px);
+  display:inline-block;
+  border: none;
+  outline: none;
+  color: #D83D2B;
+  background-color: #07082A;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
 }
 
+.planet-search button {
+  width: 20px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  background-color: transparent;
+  display:inline-block;
+}
+
+.planet-search button img {
+  max-height: 20px;
+  max-width: 50px;
+}
+/* Population and Name Toggle CSS */
 .planets-name-h button, .planets-pop-h button {
+  letter-spacing: 1px;
+  text-decoration: underline;
   background-color: transparent;
   border: none;
   padding-top: 5px;
@@ -169,12 +191,16 @@ h1 {
 .planets-name-h img, .planets-pop-h img {
   max-height: 16px;
 }
+
+/* Back to top button */
 .back-to-top {
   position: fixed; bottom: 30px; right: 40px;
 }
 .back-to-top img{
   height: 60px;
 }
+
+/* To make the website mobile friendly! */
 @media only screen and (max-width: 700px) {
   .table-wrap {
   padding: 0px;

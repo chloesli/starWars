@@ -5,6 +5,7 @@ import List from './List.jsx';
 import orderBy from 'lodash/orderBy';
 import desc from './up-arrow.png';
 import asc from './down-arrow.png';
+import searchimg from './global.png';
 const apiUrl = 'https://swapi.co/api/planets/';
 const searchUrl = 'https://swapi.co/api/planets/?search=';
 var nameimg = asc;
@@ -23,6 +24,8 @@ class App extends Component {
     }
 
     this.getPlanets = this.getPlanets.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   getPlanets() {
@@ -38,9 +41,11 @@ class App extends Component {
       page++;
     }
   }
+
   componentDidMount() {
     this.getPlanets()
   }
+  
   handleSortName() {
     this.setState({sortValue:'name'})
     if (this.state.nameDir === 'asc') {
@@ -69,12 +74,6 @@ class App extends Component {
     }
   }
 
-  updateSearch(event) {
-    console.log(event.target.value);
-    this.setState({search: event.target.value.substr(0, 25)})
-      this.showSearch()
-  }
-
   showSearch() {
     this.setState({rCount: 0});
     this.setState({planets: []})
@@ -84,9 +83,11 @@ class App extends Component {
       console.log(response.data.count)
       this.setState( {planets: response.data.results})
     })
+
     var pscount = 10;
     var page = 2;
     while (pscount < this.state.rCount) {
+      console.log(this.state.rCount)
       console.log('hiiii')
       axios.get(`${searchUrl}${this.state.search}&page=${page}`)
       .then((response) => {
@@ -98,31 +99,29 @@ class App extends Component {
       pscount += 10;
       page++;
     }
-  /*  while (this.state.rCount != null) {
-      axios.get(`${this.state.rCount}`)
-      .then((response) => {
-        this.setState({rCount: response.data.next});
-        console.log(response.data.next)
-        this.setState( {planets: response.data.results})
-      })
-    }*/
   }
 
-  getSearch() {
-    this.setState({planets: []})
-    axios.get(`${searchUrl}${this.state.search}`)
-    .then((response) => {
-      this.setState({rCount: response.data.next});
-      console.log(response.data.next)
-      this.setState( {planets: response.data.results})
-    })
+  handleChange(event) {
+    this.setState({search: event.target.value})
   }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.showSearch();
+  }
+
   render() {
-
     const {planets} = this.state;
     return (
       <div className="App">
-         <div className="planet-search">Enter a planet name: <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/> <p>{this.state.count}</p></div>
+         <div className="planet-search">Enter a planet name:
+          <form onSubmit={this.handleSubmit}>
+          <div className="search-field">
+            <input type="text" value={this.state.search} onChange={this.handleChange}/>
+             <button type="submit" alt="submit"> <img src={searchimg} alt="search" title="Search"/> </button>
+          </div>
+          </form>
+         </div>
 
          <div className="planets-name-h"><button onClick={() => this.handleSortName()}>Name <img src={nameimg} alt="sort"/> </button></div>
          <div className="planets-pop-h"><button onClick={() => this.handleSortPop()}>Population <img src={popimg} alt="sort"/> </button></div>
@@ -135,5 +134,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

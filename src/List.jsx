@@ -15,7 +15,7 @@ class List extends Component {
                <div className="planets-name">{p.name} </div>
                <div className="planets-pop"> {p.population} </div>
                <div className="planets-terrain"> {p.terrain}</div>
-          
+
             </div>
 
           )
