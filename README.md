@@ -8,15 +8,15 @@ To make this thing work, if you download the files as a ZIP, after extracing you
 
 Then run the following commands while in the project folder:
 
-## `npm install -g create-react-app`
+# `npm install -g create-react-app`
 
 AND 
 
-## `npm install lodash`
+# `npm install lodash`
 
 AND 
 
-## `npm start`
+# `npm start`
 
 Some credit goes to: 
 
