@@ -24,7 +24,7 @@ Some credit goes to:
 - Alvarotrigo's fullpage.js (https://github.com/alvarotrigo/fullPage.js)
 - Icons from https://www.flaticon.com/
 
-and the various youtubers whose I watched on youtube!
+and the various youtubers whose tutorials I watched on youtube!
 ##
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
