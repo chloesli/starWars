@@ -3,16 +3,19 @@ import './App.css';
 import axios from 'axios';
 import List from './List.jsx';
 import orderBy from 'lodash/orderBy';
-
+import desc from './up-arrow.png';
+import asc from './down-arrow.png';
 const apiUrl = 'https://swapi.co/api/planets/';
 const searchUrl = 'https://swapi.co/api/planets/?search=';
+var nameimg = asc;
+var popimg = asc;
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       planets: [],
       search: '',
-      next:null,
+      rCount:0,
       sortDirection:'asc',
       popDir:'',
       nameDir:'',
@@ -43,17 +46,13 @@ class App extends Component {
     if (this.state.nameDir === 'asc') {
       this.setState({sortDirection:'desc'})
       this.setState({nameDir:'desc'})
+      nameimg = asc;
     } else {
       this.setState({sortDirection:'asc'})
       this.setState({nameDir:'asc'})
+      nameimg = desc;
     }
-    /*console.log('sort name')
-    this.setState({
-      planets: [
-        {"name":"Chloe", "terrain":"dry", "population": "really popular"},
-        {"name":"John", "terrain":"cool", "population": "really popular x100"},
-      ]
-    })*/
+
 
   }
 
@@ -62,24 +61,59 @@ class App extends Component {
     if (this.state.popDir === 'asc') {
       this.setState({sortDirection:'desc'})
       this.setState({popDir:'desc'})
+      popimg = asc;
     } else {
       this.setState({sortDirection:'asc'})
       this.setState({popDir:'asc'})
+      popimg = desc;
     }
   }
 
   updateSearch(event) {
     console.log(event.target.value);
-    this.setState({search: event.target.value})
+    this.setState({search: event.target.value.substr(0, 25)})
+      this.showSearch()
+  }
 
-      this.getSearch()
-
+  showSearch() {
+    this.setState({rCount: 0});
+    this.setState({planets: []})
+    axios.get(`${searchUrl}${this.state.search}`)
+    .then((response) => {
+      this.setState({rCount: response.data.count});
+      console.log(response.data.count)
+      this.setState( {planets: response.data.results})
+    })
+    var pscount = 10;
+    var page = 2;
+    while (pscount < this.state.rCount) {
+      console.log('hiiii')
+      axios.get(`${searchUrl}${this.state.search}&page=${page}`)
+      .then((response) => {
+        this.setState({rCount: response.data.next});
+        console.log(response.data.next)
+        var newItems = this.state.planets.concat(response.data.results);
+        this.setState( {planets: newItems})
+      })
+      pscount += 10;
+      page++;
+    }
+  /*  while (this.state.rCount != null) {
+      axios.get(`${this.state.rCount}`)
+      .then((response) => {
+        this.setState({rCount: response.data.next});
+        console.log(response.data.next)
+        this.setState( {planets: response.data.results})
+      })
+    }*/
   }
 
   getSearch() {
     this.setState({planets: []})
     axios.get(`${searchUrl}${this.state.search}`)
     .then((response) => {
+      this.setState({rCount: response.data.next});
+      console.log(response.data.next)
       this.setState( {planets: response.data.results})
     })
   }
@@ -88,13 +122,14 @@ class App extends Component {
     const {planets} = this.state;
     return (
       <div className="App">
-         <div className="planet-search">Enter a planet name: <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/></div>
+         <div className="planet-search">Enter a planet name: <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/> <p>{this.state.count}</p></div>
 
-         <div className="planets-name-h">Name <button onClick={() => this.handleSortName()}> sort </button></div>
-         <div className="planets-pop-h">Population <button onClick={() => this.handleSortPop()}> sort </button></div>
+         <div className="planets-name-h"><button onClick={() => this.handleSortName()}>Name <img src={nameimg} alt="sort"/> </button></div>
+         <div className="planets-pop-h"><button onClick={() => this.handleSortPop()}>Population <img src={popimg} alt="sort"/> </button></div>
          <div className="planets-terrain-h"> Terrain</div>
 
          <List planets={orderBy(planets, this.state.sortValue, this.state.sortDirection)} />
+
       </div>
 
     );

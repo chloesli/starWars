@@ -11,9 +11,14 @@ body {
   box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+::-moz-selection { /* Code for Firefox */
+    color:#1A1C50;
+    background:#D83D2B;
+}
+
+::selection {
+    color:#D83D2B;
+    background-color: white;
 }
 
 .container {
@@ -55,13 +60,14 @@ code {
 a:link, a:visited, a:active {
   color: #D52812;
 }
+
 .table-wrap {
   padding: 80px;
 }
 #root {
   padding: 30px;
   background-color: #1A1C50;
-  color: white;
+  color: #E9E9E9;
 }
 .table-container {
   width: 100%;
@@ -82,32 +88,110 @@ h1 {
   text-align: left;
   box-sizing: border-box;
 }
-.planets-name-h {
-  margin-left: 40px;
-}
+
 .planets-name-h, .planets-pop-h, .planets-terrain-h {
   font-weight: bold;
-  text-decoration: underline;
   display: table-cell;
   text-align: left;
   display: inline-block;
   text-align: left;
   width: 30%;
   padding: 10px;
+  font-size: 16px;
 }
 .planets-wrap {
   text-align: left;
   height: auto;
   vertical-align: top;
-  border-bottom: 1px solid black;
   margin-top: 0px;
   box-sizing: border-box;
-  display: table-row;
-  counter-increment: index;
+  min-width: 100%;
+  display: table;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out; /*this works in firefox*/
+  -webkit-transition: all 0.2s ease-in-out; /*this works in chrome*/
+}
+.planets-wrap:hover {
+  text-align: left;
+  height: auto;
+  vertical-align: top;
+  background-color:#07082A;
+  margin-top: 0px;
+  box-sizing: border-box;
+  min-width: 100%;
+  display: table;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out; /*this works in firefox*/
+  -webkit-transition: all 0.2s ease-in-out; /*this works in chrome*/
+  -webkit-box-shadow: 0 0 5px 2px #72749C;
+  -moz-box-shadow: 0 0 5px 2px #72749C;
+  box-shadow: 0 0 5px 2px #72749C;
 }
 .planet-search {
   position: relative;
-  text-align: left;
+  text-align: center;
+  padding-bottom: 15px;
   display: block;
+  width: 100%;
+}
 
+.planet-search input[type=text] {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: #D83D2B;
+  background-color: #07082A;
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-box-shadow: 0 0 5px 2px #72749C;
+  -moz-box-shadow: 0 0 5px 2px #72749C;
+  box-shadow: 0 0 5px 2px #72749C;
+}
+
+.planet-search input[type=text]:focus {
+
+}
+
+.planets-name-h button, .planets-pop-h button {
+  background-color: transparent;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 0px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #E9E9E9;
+}
+
+.planets-name-h img, .planets-pop-h img {
+  max-height: 16px;
+}
+.back-to-top {
+  position: fixed; bottom: 30px; right: 40px;
+}
+.back-to-top img{
+  height: 60px;
+}
+@media only screen and (max-width: 700px) {
+  .table-wrap {
+  padding: 0px;
+  }
+  #root {
+    font-size: 12px;
+  }
+  .planets-name-h button, .planets-pop-h button, .planets-name-h, .planets-pop-h, .planets-terrain-h {
+    font-size: 12px;
+  }
+  .planets-name-h img, .planets-pop-h img {
+    max-height: 12px;
+  }
+  .back-to-top {
+    bottom: 20px; right: 20px;
+  }
+  .back-to-top img{
+    height: 30px;
+  }
 }

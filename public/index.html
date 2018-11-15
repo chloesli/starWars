@@ -12,7 +12,6 @@
     <title>StarWars Planets</title>
   </head>
   <body>
-  <script type="text/javascript" src="http://bpmaker.giffy.me/userdata/user/46/46275/33/parts.js"></script>
   <div id="fullpage">
 
     <div class="section">
@@ -68,7 +67,7 @@
         <div id="root"></div>
       </div>
     </div>
-    <a title="Back to Top" href="#home" style="position: fixed; bottom: 30px; right: 40px;"><img src="\images\spaceship.png" height="80px;"></a>
+    <a title="Back to Top" href="#home" class="back-to-top"><img src="\images\spaceship.png"></a>
   </div>
 </div>
 
@@ -77,6 +76,7 @@
 
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
+        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
         anchors: ['home', 'table'],
         sectionsColor: ['#4A6FB1', 'transparent'],
         autoScrolling: false,
