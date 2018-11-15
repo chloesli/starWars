@@ -1,14 +1,14 @@
 Hi there! 
 
-This is a Star Wars Planet Guide based information provided by SWAPI (https://swapi.co/). 
+This is a Star Wars Planet Guide based information provided by SWAPI (https://swapi.co/) made by Me! 
 
 To make this thing work, if you download the files as a ZIP, after extracing you will need to run the following commands: 
 
-### npm install -g create-react-app
+### `npm install -g create-react-app`
 
 AND 
 
-### npm install lodash
+### `npm install lodash`
 
 Some credit goes to: 
 
@@ -18,7 +18,7 @@ Some credit goes to:
 
 and the various youtubers whose I watched on youtube!
 
-*********************************************************************************************************
+********************************************************************************************
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
