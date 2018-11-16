@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import List from './List.jsx';
 import orderBy from 'lodash/orderBy';
+import List from './List.jsx';
+/* Images */
 import desc from './up-arrow.png';
 import asc from './down-arrow.png';
 import searchimg from './global.png';
+
+/* variables and constants */
 const apiUrl = 'https://swapi.co/api/planets/';
 const searchUrl = 'https://swapi.co/api/planets/?search=';
+/* Variable for displaying and changing the arrow images*/
 var nameimg = asc;
 var popimg = asc;
+
 class App extends Component {
+  /* Declaring state variables
+  planets - an array of planets that gets rendered
+  search - holds search term in the search bar
+  sortDirection, popDir, nameDir, sortValue - used to hold sorting directions to allow toggling
+  Default sortDirection and sortValue is ascending order by url
+  */
   constructor(props) {
     super(props);
     this.state = {
       planets: [],
       search: '',
-      rCount:0,
       sortDirection:'asc',
       popDir:'',
       nameDir:'',
@@ -24,10 +34,14 @@ class App extends Component {
     }
 
     this.getPlanets = this.getPlanets.bind(this);
+    /* search bar handlers*/
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /* Function that displays all the planets initially - Displays all 7 pages of search results
+     Appends the
+  */
   getPlanets() {
     this.setState({planets: []})
     var page = 1;
@@ -46,6 +60,7 @@ class App extends Component {
     this.getPlanets()
   }
 
+  /* Helps toggle Sorting by name*/
   handleSortName() {
     this.setState({sortValue:'name'})
     if (this.state.nameDir === 'asc') {
@@ -57,10 +72,9 @@ class App extends Component {
       this.setState({nameDir:'asc'})
       nameimg = desc;
     }
-
-
   }
 
+  /* Helps toggle Sorting by population*/
   handleSortPop(){
     this.setState({sortValue:'population'})
     if (this.state.popDir === 'asc') {
@@ -74,37 +88,22 @@ class App extends Component {
     }
   }
 
+  /* Shows top 10 results */
   showSearch() {
-    this.setState({rCount: 0});
     this.setState({planets: []})
     axios.get(`${searchUrl}${this.state.search}`)
     .then((response) => {
-      this.setState({rCount: response.data.count});
-      console.log(response.data.count)
+      console.log('search registered')
+      console.log(response.data.results)
       this.setState( {planets: response.data.results})
     })
-
-    var pscount = 10;
-    var page = 2;
-    while (pscount < this.state.rCount) {
-      console.log(this.state.rCount)
-      console.log('hiiii')
-      axios.get(`${searchUrl}${this.state.search}&page=${page}`)
-      .then((response) => {
-        this.setState({rCount: response.data.next});
-        console.log(response.data.next)
-        var newItems = this.state.planets.concat(response.data.results);
-        this.setState( {planets: newItems})
-      })
-      pscount += 10;
-      page++;
-    }
   }
 
+  /* Changes the state of search*/
   handleChange(event) {
     this.setState({search: event.target.value})
   }
-
+  /*Shows search results*/
   handleSubmit(event) {
     event.preventDefault();
     this.showSearch();
