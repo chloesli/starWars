@@ -109,6 +109,7 @@ class App extends Component {
     this.showSearch();
   }
 
+  /* Renders the table and search bar as well as the Name and population buttons*/
   render() {
     const {planets} = this.state;
     return (
@@ -117,7 +118,7 @@ class App extends Component {
           <form onSubmit={this.handleSubmit}>
           <div className="search-field">
             <input type="text" value={this.state.search} onChange={this.handleChange}/>
-             <button type="submit" alt="submit"> <img src={searchimg} alt="search" title="Search"/> </button>
+            <button type="submit" alt="submit"> <img src={searchimg} alt="search" title="Search"/> </button>
           </div>
           </form>
          </div>

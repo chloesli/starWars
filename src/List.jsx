@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class List extends Component {
   render() {
     const planets = this.props.planets;
-    /* Renders each row of*/
+    /* Renders each row of planets in the planets array*/
     return (
       <div className="">
       {
