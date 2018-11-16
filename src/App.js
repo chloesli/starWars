@@ -103,10 +103,15 @@ class App extends Component {
   handleChange(event) {
     this.setState({search: event.target.value})
   }
+
   /*Shows search results*/
   handleSubmit(event) {
     event.preventDefault();
-    this.showSearch();
+    if (this.state.search === '') {
+      this.getPlanets();
+    } else {
+      this.showSearch();
+    }
   }
 
   /* Renders the table and search bar as well as the Name and population buttons*/
