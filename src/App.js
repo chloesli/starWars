@@ -9,6 +9,7 @@ import asc from './down-arrow.png';
 import searchimg from './global.png';
 
 /* variables and constants */
+const proxyurl = 'https://cors-anywhere.herokuapp.com/';
 const apiUrl = 'https://swapi.co/api/planets/';
 const searchUrl = 'https://swapi.co/api/planets/?search=';
 /* Variable for displaying and changing the arrow images*/
@@ -46,7 +47,7 @@ class App extends Component {
     this.setState({planets: []})
     var page = 1;
     while (page < 8) {
-      axios.get(`${apiUrl}?page=${page}`)
+      axios.get(`${proxyurl}${apiUrl}?page=${page}`)
       .then((response) => {
         console.log(response.data.results);
         var newItems = this.state.planets.concat(response.data.results);
