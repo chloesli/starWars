@@ -2,6 +2,8 @@ Hi there!
 
 This is a Star Wars Planet Guide based information provided by SWAPI (https://swapi.co/) developed and designed by Me! 
 
+<b> Feel free to download the Star Wars Planet Guide - Google Chrome Video for a preview! </b>
+
 To make this thing work, if you download the files as a ZIP, after extracing you will need to:
 
 - Have node.js installed
