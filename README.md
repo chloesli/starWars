@@ -1,6 +1,6 @@
 Hi there! 
 
-This is a Star Wars Planet Guide based information provided by SWAPI (https://swapi.co/) made by Me! 
+This is a Star Wars Planet Guide based information provided by SWAPI (https://swapi.co/) developed and designed by Me! 
 
 To make this thing work, if you download the files as a ZIP, after extracing you will need to:
 
